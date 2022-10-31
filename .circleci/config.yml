@@ -17,9 +17,11 @@ jobs:
           name: Fetch dependencies
           command: npm ci
       - save_cache:
+          key: node-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
               - ~/.npm
               - ~/.cache
+              - ~/node_modules
       - run: npx lerna run test 
 
 workflows:
