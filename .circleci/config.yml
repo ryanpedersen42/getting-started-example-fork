@@ -9,7 +9,6 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      # - run: npm run install
       - run: npx lerna run test
 
 workflows:
