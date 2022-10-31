@@ -8,7 +8,8 @@ jobs:
     executor: node
     steps:
       - checkout
-      - run: npm run install
+      - node/install-packages
+      # - run: npm run install
       - run: npx lerna run test
 
 workflows:
