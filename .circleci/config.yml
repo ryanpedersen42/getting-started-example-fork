@@ -8,7 +8,18 @@ jobs:
     executor: node
     steps:
       - checkout
-      - node/install-packages
+      - restore_cache:
+          keys:
+              - node-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+              - node-cache-v1-{{ .Branch }}-
+              - node-cache-v1-
+      - run:
+          name: Fetch dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+              - ~/.npm
+              - ~/.cache
       - run: npx lerna run test
 
 workflows:
