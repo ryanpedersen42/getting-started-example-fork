@@ -1,0 +1,24 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.3
+
+jobs:
+  test:
+    executor: node
+    steps:
+      - checkout
+      - run: npm run install
+      - run: npx lerna run test
+
+workflows:
+  main:
+    jobs:
+      - test
+
+executors:
+  node:
+    docker:
+      - image: cimg/node:lts
+
+# VS Code Extension Version: 1.0.0
